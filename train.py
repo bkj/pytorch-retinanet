@@ -50,7 +50,7 @@ def parse_args():
     parser.add_argument('--lr', type=float, default=1e-5)
     parser.add_argument('--lr-patience', type=float, default=3)
     parser.add_argument('--batch-size', type=int, default=2)
-    parser.add_argument('--max-grad-norm', type=float, default=0.1)
+    parser.add_argument('--max-grad-norm', type=float, default=0.1)  # !! This seems small?
     parser.add_argument('--config-path', type=str, default='./.config.json')
     
     args = parser.parse_args()
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     
     dataloader_train = DataLoader(
         dataset_train,
-        num_workers=3,
+        num_workers=4,
         collate_fn=collater,
         batch_sampler=AspectRatioBasedSampler(dataset_train, batch_size=args.batch_size, drop_last=False),
     )
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     if dataset_val is not None:
         dataloader_val = DataLoader(
             dataset_val,
-            num_workers=3,
+            num_workers=4,
             collate_fn=collater,
             batch_sampler=AspectRatioBasedSampler(dataset_val, batch_size=1, drop_last=False),
         )
@@ -165,7 +165,7 @@ if __name__ == "__main__":
             #     continue
             
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(retinanet.parameters(), args.max_grad_norm) # !! This seems small?
+            torch.nn.utils.clip_grad_norm_(retinanet.parameters(), args.max_grad_norm)
             
             opt.step()
             

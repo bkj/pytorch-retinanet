@@ -38,7 +38,7 @@ unzip -q val2017.zip && rm val2017.zip
 
 mkdir -p results
 python train.py \
-    --batch-size 16 \
+    --batch-size 12 \
     --dataset coco \
     --coco-path data/coco \
     --depth 50 | tee results/coco_50_v0.jl
