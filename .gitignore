@@ -1,3 +1,10 @@
+*pth
+lib/nms/_ext/*
+*.o
+results/*
+.config.json
+data/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
